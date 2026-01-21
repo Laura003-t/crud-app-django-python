@@ -1,0 +1,84 @@
+{% extends 'hrapp/base.html' %}
+
+{% block title %}{{ action }} Employee - HR System{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div style="max-width: 800px; margin: 0 auto;">
+        <h2 style="margin-bottom: 30px;">{{ action }} Employee</h2>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div>
+                    <label>First Name *</label>
+                    {{ form.firstname }}
+                </div>
+                <div>
+                    <label>Last Name *</label>
+                    {{ form.lastname }}
+                </div>
+                <div>
+                    <label>Age *</label>
+                    {{ form.age }}
+                </div>
+                <div>
+                    <label>Email</label>
+                    {{ form.email }}
+                </div>
+                <div>
+                    <label>Phone</label>
+                    {{ form.phone }}
+                </div>
+                <div>
+                    <label>Staff ID * (7 characters)</label>
+                    {{ form.staffID }}
+                </div>
+                <div>
+                    <label>Title *</label>
+                    {{ form.title }}
+                </div>
+                <div>
+                    <label>Position *</label>
+                    {{ form.position }}
+                </div>
+                <div>
+                    <label>Department *</label>
+                    {{ form.department }}
+                </div>
+                <div>
+                    <label>Division *</label>
+                    {{ form.division }}
+                </div>
+                <div>
+                    <label>Unit *</label>
+                    {{ form.unit }}
+                </div>
+                <div>
+                    <label>Start Date *</label>
+                    {{ form.start_date }}
+                </div>
+            </div>
+
+            {% if form.errors %}
+            <div class="alert alert-error" style="margin-top: 20px;">
+                <strong>Please correct the following errors:</strong>
+                <ul style="margin-top: 10px;">
+                    {% for field, errors in form.errors.items %}
+                    {% for error in errors %}
+                    <li>{{ field }}: {{ error }}</li>
+                    {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            <div style="margin-top: 30px; display: flex; gap: 10px;">
+                <button type="submit" class="btn btn-primary">{{ action }} Employee</button>
+                <a href="{% url 'employee_list' %}" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

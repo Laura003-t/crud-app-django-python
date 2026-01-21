@@ -1,0 +1,65 @@
+{% extends 'hrapp/base.html' %}
+
+{% block title %}Employees - HR System{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+        <h2>Employee Directory</h2>
+        <a href="{% url 'employee_add' %}" class="btn btn-primary">+ Add New Employee</a>
+    </div>
+
+    <!-- Search and Filter -->
+    <div style="margin-bottom: 20px; display: flex; gap: 15px;">
+        <form method="get" style="flex: 1; display: flex; gap: 10px;">
+            <input type="text" name="search" placeholder="Search by name, ID, or department..."
+                value="{{ search_query }}" class="form-input" style="margin: 0;">
+
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+
+    <!-- Employee Table -->
+    <div style="overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background: #f8f9fa; border-bottom: 2px solid #dee2e6;">
+                    <th style="padding: 12px; text-align: left;">Staff ID</th>
+                    <th style="padding: 12px; text-align: left;">Name</th>
+                    <th style="padding: 12px; text-align: left;">Position</th>
+                    <th style="padding: 12px; text-align: left;">Department</th>
+                    <th style="padding: 12px; text-align: left;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for employee in employees %}
+                <tr style="border-bottom: 1px solid #dee2e6;">
+                    <td style="padding: 12px;">{{ employee.staffID }}</td>
+                    <td style="padding: 12px;">{{ employee.full_name }}</td>
+                    <td style="padding: 12px;">{{ employee.position }}</td>
+                    <td style="padding: 12px;">{{ employee.department }}</td>
+                    <td style="padding: 12px;">
+                        <a href="{% url 'employee_detail' employee.pk %}" style="color: #2563eb
+; margin-right: 10px;">View</a>
+                        <a href="{% url 'employee_edit' employee.pk %}"
+                            style="color: #28a745; margin-right: 10px;">Edit</a>
+                        <a href="{% url 'employee_delete' employee.pk %}" style="color: #dc3545;">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" style="padding: 30px; text-align: center; color: #6c757d;">
+                        No employees found. <a href="{% url 'employee_add' %}" style="color: #2563eb
+;">Add your first employee</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <p style="margin-top: 20px; color: #6c757d;">
+        Total: {{ employees.count }} employee{{ employees.count|pluralize }}
+    </p>
+</div>
+{% endblock %}

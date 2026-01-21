@@ -1,0 +1,82 @@
+{% extends 'hrapp/base.html' %}
+
+{% block title %}{{ employee.full_name }} - HR System{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div style="max-width: 800px; margin: 0 auto;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+            <h2>{{ employee.full_name }}</h2>
+            <div style="display: flex; gap: 10px;">
+                <a href="{% url 'employee_edit' employee.pk %}" class="btn btn-primary">Edit</a>
+                <a href="{% url 'employee_delete' employee.pk %}" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div style="padding: 15px; background: #f8f9fa; border-radius: 5px;">
+                <strong style="color: #6c757d;">Staff ID</strong>
+                <p style="margin-top: 5px; font-size: 18px;">{{ employee.staffID }}</p>
+            </div>
+
+            <div style="padding: 15px; background: #f8f9fa; border-radius: 5px;">
+                <strong style="color: #6c757d;">Age</strong>
+                <p style="margin-top: 5px; font-size: 18px;">{{ employee.age }}</p>
+            </div>
+
+            <div style="padding: 15px; background: #f8f9fa; border-radius: 5px;">
+                <strong style="color: #6c757d;">Email</strong>
+                <p style="margin-top: 5px; font-size: 18px;">{{ employee.email|default:"N/A" }}</p>
+            </div>
+
+            <div style="padding: 15px; background: #f8f9fa; border-radius: 5px;">
+                <strong style="color: #6c757d;">Phone</strong>
+                <p style="margin-top: 5px; font-size: 18px;">{{ employee.phone|default:"N/A" }}</p>
+            </div>
+
+            <div style="padding: 15px; background: #f8f9fa; border-radius: 5px;">
+                <strong style="color: #6c757d;">Title</strong>
+                <p style="margin-top: 5px; font-size: 18px;">{{ employee.title }}</p>
+            </div>
+
+            <div style="padding: 15px; background: #f8f9fa; border-radius: 5px;">
+                <strong style="color: #6c757d;">Position</strong>
+                <p style="margin-top: 5px; font-size: 18px;">{{ employee.position }}</p>
+            </div>
+
+            <div style="padding: 15px; background: #f8f9fa; border-radius: 5px;">
+                <strong style="color: #6c757d;">Department</strong>
+                <p style="margin-top: 5px; font-size: 18px;">{{ employee.department }}</p>
+            </div>
+
+            <div style="padding: 15px; background: #f8f9fa; border-radius: 5px;">
+                <strong style="color: #6c757d;">Division</strong>
+                <p style="margin-top: 5px; font-size: 18px;">{{ employee.division }}</p>
+            </div>
+
+            <div style="padding: 15px; background: #f8f9fa; border-radius: 5px;">
+                <strong style="color: #6c757d;">Unit</strong>
+                <p style="margin-top: 5px; font-size: 18px;">{{ employee.unit }}</p>
+            </div>
+
+            <div style="padding: 15px; background: #f8f9fa; border-radius: 5px;">
+                <strong style="color: #6c757d;">Start Date</strong>
+                <p style="margin-top: 5px; font-size: 18px;">{{ employee.start_date|date:"M d, Y" }}</p>
+            </div>
+
+            
+        </div>
+
+        <div style="margin-top: 30px; padding: 15px; background: #e9ecef; border-radius: 5px;">
+            <p style="color: #6c757d; font-size: 14px;">
+                <strong>Created:</strong> {{ employee.created_at|date:"M d, Y H:i" }} |
+                <strong>Last Updated:</strong> {{ employee.updated_at|date:"M d, Y H:i" }}
+            </p>
+        </div>
+
+        <div style="margin-top: 30px;">
+            <a href="{% url 'employee_list' %}" class="btn btn-secondary">← Back to Employee List</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

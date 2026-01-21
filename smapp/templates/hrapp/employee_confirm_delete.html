@@ -1,0 +1,27 @@
+{% extends 'hrapp/base.html' %}
+
+{% block title %}Delete Employee - HR System{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div style="max-width: 600px; margin: 50px auto; text-align: center;">
+        <h2 style="color: #dc3545; margin-bottom: 20px;">⚠️ Confirm Deletion</h2>
+
+        <div
+            style="background: #f8d7da; border: 1px solid #f5c6cb; padding: 20px; border-radius: 5px; margin-bottom: 30px;">
+            <p style="color: #721c24; font-size: 16px;">
+                Are you sure you want to delete employee <strong>{{ employee.full_name }}</strong> ({{ employee.staffID }})?
+            </p>
+            <p style="color: #721c24; margin-top: 10px;">
+                This action cannot be undone.
+            </p>
+        </div>
+
+        <form method="post" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Yes, Delete Employee</button>
+            <a href="{% url 'employee_list' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}
